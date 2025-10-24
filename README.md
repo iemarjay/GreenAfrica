@@ -1,6 +1,6 @@
 # GreenAfrica
 
-**Track:** DLT for Operations
+**Track:** DLT for Operations  
 **Sub-track**: 4, Sustainability & Impact Tech
 
 GreenAfrica turns reverse vending machines deployed across African cities into digitally verifiable recycling stations, pairing real-world bottle recovery with instant, tokenized rewards backed by Hedera's low-cost, high-trust infrastructure.
