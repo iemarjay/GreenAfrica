@@ -1,5 +1,13 @@
 # GreenAfrica
 
+## Hedera Certification
+
+https://drive.google.com/file/d/1J5dpu8Mr0HWa4Uu2BkdkySVCzppRWVx4/view
+
+## Pitch Deck
+
+https://drive.google.com/file/d/1A5GV2dYkhUOWdbIoe0DIInnNxrAwEQ_r/view
+
 **Track:** DLT for Operations  
 **Sub-track**: 4, Sustainability & Impact Tech
 
@@ -83,14 +91,6 @@ We broadcast hashed deposit receipts to a dedicated HCS topic so sponsors and re
 - **Configure Hedera access:** set `HEDERA_NETWORK=testnet`, point `HEDERA_RPC_URL` to a testnet endpoint (e.g. `https://testnet.hashio.io/api`), and provide operator `HEDERA_OPERATOR_ID`/`HEDERA_OPERATOR_KEY`.
 - **Link project contracts:** ensure `GREEN_AFRICA_CONTRACT_ID` and `GREENPOINTS_TOKEN_ID` reflect the desired testnet deployments.
 - **Run the dev server:** `npm run dev`, then open `http://localhost:3000` to interact with the Hedera testnet-backed dashboard.
-
-## Hedera Certification
-
-https://drive.google.com/file/d/1J5dpu8Mr0HWa4Uu2BkdkySVCzppRWVx4/view
-
-## Pitch Deck
-
-https://drive.google.com/file/d/1A5GV2dYkhUOWdbIoe0DIInnNxrAwEQ_r/view
 
 ## Hedera Testnet Contracts
 
