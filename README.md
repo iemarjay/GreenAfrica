@@ -84,6 +84,14 @@ We broadcast hashed deposit receipts to a dedicated HCS topic so sponsors and re
 - **Link project contracts:** ensure `GREEN_AFRICA_CONTRACT_ID` and `GREENPOINTS_TOKEN_ID` reflect the desired testnet deployments.
 - **Run the dev server:** `npm run dev`, then open `http://localhost:3000` to interact with the Hedera testnet-backed dashboard.
 
+## Hedera Certification
+
+https://drive.google.com/file/d/1J5dpu8Mr0HWa4Uu2BkdkySVCzppRWVx4/view
+
+## Pitch Deck
+
+https://drive.google.com/file/d/1A5GV2dYkhUOWdbIoe0DIInnNxrAwEQ_r/view
+
 ## Hedera Testnet Contracts
 
 - GreenAfrica RVM Contract ID: `0.0.6779400`
