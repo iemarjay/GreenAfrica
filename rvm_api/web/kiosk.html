@@ -108,12 +108,14 @@
 
     let lastPoints = 0;
     let audioUnlocked = false;
+    let serverWasDown = false;
 
     // ---- Camera stream (auto-reconnecting) ----
-    // A service restart drops the MJPEG connection; instead of waiting for a
-    // human to tap Retry, we show "Reconnecting…" and keep re-pointing the
-    // stream until it comes back. The status poll also nudges a reconnect the
-    // moment the API is reachable again, so the kiosk self-heals.
+    // A service restart drops the MJPEG connection. We can't rely on the <img>
+    // `error` event — a mid-stream connection reset often does NOT fire it, so
+    // the image just goes black. The reliable signal is the /status poll: when
+    // it fails (server gone) and then succeeds again (server back), we force a
+    // fresh stream connection. The `error` path below is kept as a fallback.
     let streamRetry = null;
     function startStream() {
       clearTimeout(streamRetry);
@@ -146,7 +148,11 @@
       try {
         const res = await fetch("/status");
         const json = await res.json();
-        // API is reachable — if the stream was showing "Reconnecting…", nudge it
+        // Recovery edge: the API was unreachable (e.g. rvm.service restart) and
+        // is back. The MJPEG <img> is likely holding a dead connection that
+        // never fired `error`, so force a fresh stream. This is what actually
+        // makes the kiosk self-heal after a backend restart.
+        if (serverWasDown) { serverWasDown = false; startStream(); }
         if (errorBox.classList.contains("show")) startStream();
         const pts = json.points ?? 0;
         if (pts > lastPoints) playDing();
@@ -154,6 +160,11 @@
         pointsValue.textContent = pts;
         window.__lastCode = json.last_code || null;
       } catch (e) {
+        // API unreachable — mark it so the next successful poll reconnects the
+        // stream, and show the operator we're recovering.
+        serverWasDown = true;
+        $("error-msg").textContent = "Reconnecting…";
+        errorBox.classList.add("show");
         console.log("status error", e);
       }
     }
