@@ -109,14 +109,22 @@
     let lastPoints = 0;
     let audioUnlocked = false;
 
-    // ---- Camera stream ----
+    // ---- Camera stream (auto-reconnecting) ----
+    // A service restart drops the MJPEG connection; instead of waiting for a
+    // human to tap Retry, we show "Reconnecting…" and keep re-pointing the
+    // stream until it comes back. The status poll also nudges a reconnect the
+    // moment the API is reachable again, so the kiosk self-heals.
+    let streamRetry = null;
     function startStream() {
-      errorBox.classList.remove("show");
-      stream.src = "/stream?ts=" + Date.now(); // cache-bust so Retry reconnects
+      clearTimeout(streamRetry);
+      stream.src = "/stream?ts=" + Date.now(); // cache-bust forces a fresh connection
     }
+    stream.addEventListener("load", () => errorBox.classList.remove("show"));
     stream.addEventListener("error", () => {
-      $("error-msg").textContent = "Unable to load stream.";
+      $("error-msg").textContent = "Reconnecting…";
       errorBox.classList.add("show");
+      clearTimeout(streamRetry);
+      streamRetry = setTimeout(startStream, 2000);
     });
     $("retry").addEventListener("click", startStream);
 
@@ -138,6 +146,8 @@
       try {
         const res = await fetch("/status");
         const json = await res.json();
+        // API is reachable — if the stream was showing "Reconnecting…", nudge it
+        if (errorBox.classList.contains("show")) startStream();
         const pts = json.points ?? 0;
         if (pts > lastPoints) playDing();
         lastPoints = pts;
