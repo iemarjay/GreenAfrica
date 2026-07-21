@@ -1,8 +1,11 @@
 from fastapi import APIRouter, Response, HTTPException
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from pydantic import BaseModel
 from typing import Optional
+from pathlib import Path
 import io, qrcode, cv2, time
+
+WEB_DIR = Path(__file__).resolve().parent.parent / "web"
 
 from .models import state, event_lock
 from .events import register_accept, register_reject
@@ -10,6 +13,18 @@ from .settings import settings
 from .factory import detector
 
 router = APIRouter()
+
+# -------------------- Kiosk UI --------------------
+@router.get("/", include_in_schema=False)
+@router.get("/kiosk", include_in_schema=False)
+def kiosk_page():
+    """Full-screen recycler kiosk UI (served same-origin for Chromium kiosk)."""
+    return FileResponse(WEB_DIR / "kiosk.html", media_type="text/html")
+
+@router.get("/kiosk/ding.mp3", include_in_schema=False)
+def kiosk_ding():
+    return FileResponse(WEB_DIR / "ding.mp3", media_type="audio/mpeg")
+
 
 # -------------------- Status --------------------
 class StatusOut(BaseModel):

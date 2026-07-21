@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>GreenAfrica RVM</title>
+  <style>
+    /*
+      Target device: 4" MPI4008 panel, 480x800 portrait, RESISTIVE touch.
+      Resistive = single-touch + imprecise, and ~230ppi makes everything
+      physically small, so tap targets are sized generously (>=64px) and type
+      is large. All controls give an obvious pressed state for tap confirmation.
+    */
+    :root { --green: #1b5e20; --green-light: #2e7d33; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none; }
+    html, body { margin: 0; height: 100%; background: #000; overflow: hidden;
+      overscroll-behavior: none;
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+      user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+    img { -webkit-user-drag: none; user-drag: none; }
+
+    /* Full-bleed camera stream. MJPEG must live in an <img>, never a top-level page. */
+    #stream { position: fixed; inset: 0; width: 100%; height: 100%;
+      object-fit: contain; background: #000; }
+
+    /* Points badge — large enough to read across the kiosk */
+    #points { position: fixed; top: 20px; left: 20px; z-index: 10;
+      background: rgba(0,0,0,.72); padding: 12px 20px; border-radius: 16px; }
+    #points .label { font-size: 15px; color: #fff; opacity: .85; line-height: 1; }
+    #points .value { font-size: 36px; font-weight: 800; color: #fff; line-height: 1.15; }
+
+    /* Primary touch controls: min 64px tall, big type, obvious press feedback */
+    .touch { border: 0; font-weight: 700; touch-action: manipulation;
+      transition: transform .05s ease, filter .05s ease; }
+    .touch:active { transform: scale(.96); filter: brightness(.88); }
+
+    #done { position: fixed; top: 20px; right: 20px; z-index: 10;
+      background: #fff; color: #000; font-size: 22px;
+      min-height: 64px; padding: 0 30px; border-radius: 32px;
+      box-shadow: 0 3px 10px rgba(0,0,0,.4); }
+
+    /* Modal */
+    .modal { position: fixed; inset: 0; z-index: 20; display: none;
+      background: rgba(0,0,0,.82); align-items: center; justify-content: center; padding: 24px; }
+    .modal.show { display: flex; }
+    .card { position: relative; background: #fff; border-radius: 24px;
+      padding: 34px 26px 30px; width: 100%; max-width: 430px; text-align: center;
+      box-shadow: 0 6px 26px rgba(0,0,0,.45); }
+    .card h2 { margin: 0 0 22px; font-size: 23px; line-height: 1.3; color: #000; padding: 0 40px; }
+
+    /* Dismiss-without-reset — large circular hit area in the corner */
+    .close { position: absolute; top: 12px; right: 12px; width: 56px; height: 56px;
+      border-radius: 50%; background: #f0f0f0; color: #333; font-size: 30px; line-height: 1;
+      display: flex; align-items: center; justify-content: center; }
+
+    .qr-box { background: #f8f8f8; border-radius: 18px; padding: 16px; display: inline-block; margin-bottom: 22px; }
+    .qr-box img { width: 230px; height: 230px; display: block; }
+    .code { background: #f0f0f0; border-radius: 12px; padding: 18px; margin-bottom: 22px;
+      font-size: 20px; font-weight: 600; color: #000; word-break: break-all; }
+    .btn-green { background: var(--green); color: #fff; font-size: 24px;
+      min-height: 76px; padding: 0 30px; border-radius: 40px; width: 100%; }
+
+    /* Error overlay */
+    #error { position: fixed; inset: 0; z-index: 30; display: none;
+      flex-direction: column; align-items: center; justify-content: center; padding: 28px;
+      background: rgba(0,0,0,.96); text-align: center; }
+    #error.show { display: flex; }
+    #error h2 { color: #fff; font-size: 28px; margin: 0 0 14px; }
+    #error p { color: #ccc; font-size: 18px; margin: 0 0 28px; }
+    #error .btn-retry { background: #fff; color: #000; font-size: 22px;
+      min-height: 68px; padding: 0 40px; border-radius: 34px; }
+  </style>
+</head>
+<body>
+  <img id="stream" alt="RVM camera stream" />
+
+  <div id="points">
+    <div class="label">Points</div>
+    <div class="value" id="points-value">0</div>
+  </div>
+
+  <button id="done" class="touch" aria-label="Show my reward QR code">Done</button>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="card">
+      <button class="close touch" id="close" aria-label="Close">&times;</button>
+      <h2 id="modal-title">Scan QR code with the GreenAfrica app</h2>
+      <div class="qr-box"><img id="qr" alt="Reward QR code" /></div>
+      <div class="code" id="code" hidden></div>
+      <button class="btn-green touch" id="reset">Reset &amp; Close</button>
+    </div>
+  </div>
+
+  <div id="error">
+    <h2>Stream Unavailable</h2>
+    <p id="error-msg">Unable to load stream.</p>
+    <button class="btn-retry touch" id="retry">Retry</button>
+  </div>
+
+  <audio id="ding" src="/kiosk/ding.mp3" preload="auto"></audio>
+
+  <script>
+    // Served by rvm_api, so everything is same-origin — use relative paths.
+    const $ = (id) => document.getElementById(id);
+    const stream = $("stream"), pointsValue = $("points-value");
+    const modal = $("modal"), errorBox = $("error"), ding = $("ding");
+
+    let lastPoints = 0;
+    let audioUnlocked = false;
+
+    // ---- Camera stream ----
+    function startStream() {
+      errorBox.classList.remove("show");
+      stream.src = "/stream?ts=" + Date.now(); // cache-bust so Retry reconnects
+    }
+    stream.addEventListener("error", () => {
+      $("error-msg").textContent = "Unable to load stream.";
+      errorBox.classList.add("show");
+    });
+    $("retry").addEventListener("click", startStream);
+
+    // ---- Audio: unlock on first touch (kiosk autoplay policy fallback) ----
+    function unlockAudio() {
+      if (audioUnlocked) return;
+      ding.play().then(() => { ding.pause(); ding.currentTime = 0; audioUnlocked = true; })
+        .catch(() => {});
+    }
+    document.body.addEventListener("pointerdown", unlockAudio, { once: true });
+
+    function playDing() {
+      ding.currentTime = 0;
+      ding.play().catch((e) => console.log("ding blocked", e));
+    }
+
+    // ---- Status polling ----
+    async function poll() {
+      try {
+        const res = await fetch("/status");
+        const json = await res.json();
+        const pts = json.points ?? 0;
+        if (pts > lastPoints) playDing();
+        lastPoints = pts;
+        pointsValue.textContent = pts;
+        window.__lastCode = json.last_code || null;
+      } catch (e) {
+        console.log("status error", e);
+      }
+    }
+
+    // ---- Done / QR modal ----
+    function openModal() {
+      const code = window.__lastCode;
+      $("qr").src = "/qr.png" + (code ? "?code=" + encodeURIComponent(code) : "");
+      const codeEl = $("code");
+      if (code) { codeEl.textContent = "Code: " + code; codeEl.hidden = false; }
+      else { codeEl.hidden = true; }
+      modal.classList.add("show");
+    }
+    function closeModal() { modal.classList.remove("show"); }
+
+    $("done").addEventListener("click", openModal);
+    $("close").addEventListener("click", closeModal);       // dismiss, keep points
+    modal.addEventListener("click", (e) => {                // tap backdrop to dismiss
+      if (e.target === modal) closeModal();
+    });
+
+    $("reset").addEventListener("click", async () => {
+      try { await fetch("/reset", { method: "POST" }); } catch (e) { console.log("reset error", e); }
+      lastPoints = 0;
+      pointsValue.textContent = 0;
+      closeModal();
+    });
+
+    // ---- Boot ----
+    startStream();
+    fetch("/reseed", { method: "POST" }).catch((e) => console.log("reseed error", e));
+    poll();
+    setInterval(poll, 500);
+  </script>
+</body>
+</html>
