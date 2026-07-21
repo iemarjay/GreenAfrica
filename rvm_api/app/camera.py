@@ -1,26 +1,30 @@
+import subprocess
 import cv2
 from .settings import settings
+
 
 def open_camera():
     cap = cv2.VideoCapture(settings.CAM_INDEX)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, settings.FRAME_W)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, settings.FRAME_H)
-    _lock_camera_params(cap)
+    _apply_camera_controls(settings.CAM_INDEX)
     return cap
 
-def _lock_camera_params(cap):
-    # Best-effort – safe if unsupported by device.
-    try:
-        cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.75)  # manual on many UVC cams
-    except:
-        pass
-    for val in [50, 100, 200, 400]:
-        if cap.set(cv2.CAP_PROP_EXPOSURE, float(val)):
-            break
-    try:
-        cap.set(cv2.CAP_PROP_AUTO_WB, 0)
-    except:
-        pass
-    for val in [4200, 4500, 5000]:
-        if cap.set(cv2.CAP_PROP_WB_TEMPERATURE, float(val)):
-            break
+
+def _apply_camera_controls(index: int):
+    """Set exposure / white balance / gain via v4l2-ctl.
+
+    OpenCV's CAP_PROP_* exposure mappings are unreliable on UVC cameras, so we
+    drive the controls directly. Best-effort: each control is independent and a
+    failure (unsupported control, missing v4l2-ctl) is logged, not fatal.
+    """
+    dev = f"/dev/video{index}"
+    for name, val in settings.CAM_V4L2_CONTROLS.items():
+        try:
+            subprocess.run(
+                ["v4l2-ctl", "-d", dev, f"--set-ctrl={name}={val}"],
+                check=False, timeout=3,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
+        except Exception as e:
+            print(f"[camera] v4l2 set {name}={val} failed: {e}")
