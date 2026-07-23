@@ -11,6 +11,7 @@ This replaces the Expo tablet app in `../../rvm`.
 - `kiosk.sh` — waits for `rvm.service`, then launches Chromium in kiosk mode.
 - `kanshi.config` — display orientation (landscape) for the 4" panel, applied by
   kanshi (labwc's display-config daemon) at the display level, not the kiosk.
+- `display-power.sh` — blanks the panel after an idle timeout, wakes on touch.
 
 ## One-time setup on the Pi
 
@@ -28,6 +29,32 @@ echo '~/rvm_api/deploy/kiosk.sh &' >> ~/.config/labwc/autostart
 mkdir -p ~/.config/kanshi
 cp ~/rvm_api/deploy/kanshi.config ~/.config/kanshi/config
 ```
+
+## Panel power saving (blank when idle, wake on touch) — UNVERIFIED
+
+Only the panel sleeps; the Pi stays awake so the detector keeps watching for
+drops.
+
+```bash
+sudo apt install -y swayidle
+chmod +x ~/rvm_api/deploy/display-power.sh
+echo '~/rvm_api/deploy/display-power.sh &' >> ~/.config/labwc/autostart
+```
+
+`wlopm` is preferred over `wlr-randr --off` (it powers the output down without
+disabling it, so kanshi's landscape transform survives), but it is **not
+packaged for Debian bookworm** — build it from
+<https://sr.ht/~leon_plickat/wlopm/>. The script falls back to `wlr-randr`
+automatically and re-asserts `transform 90` on wake.
+
+**Known rough edges on labwc/RPi — test on-device before relying on this:**
+- Some labwc/RPi setups never wake the panel after blanking
+  ([labwc#3352](https://github.com/labwc/labwc/issues/3352)).
+- Touch wake can need several taps rather than one.
+- The first touch after wake is consumed by the wake itself — desirable here,
+  since it stops the wake-tap from hitting a kiosk button.
+- Blanking by *disabling* the output can make kanshi re-apply its profile and
+  fight the blank; that is why `wlopm` is preferred.
 
 Reboot (or `labwc --reconfigure` / re-login) and the kiosk comes up full-screen
 once the API answers `/status`.
