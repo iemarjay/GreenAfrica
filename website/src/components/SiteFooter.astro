@@ -1,0 +1,68 @@
+---
+const year = new Date().getFullYear();
+
+const nav = [
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/for-brands", label: "For Brands" },
+  { href: "/for-partners", label: "For Partners" },
+  { href: "/technology", label: "Technology" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+---
+
+<footer class="bg-pine-deep text-paper">
+  <div class="container-x py-14 sm:py-16">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow text-leaf-bright">Green Africa</p>
+        <p class="mt-4 max-w-sm text-2xl font-semibold leading-snug tracking-tight text-paper">
+          Proof of recovery, machine by machine.
+        </p>
+        <p class="mt-5 max-w-md text-sm leading-relaxed text-paper/60">
+          Green Africa is a Nigerian recovery-infrastructure venture building locally fabricated
+          reverse vending machines that verify PET plastic at the point of collection, reward
+          recyclers instantly with airtime and data, and log every deposit to the Hedera public
+          ledger.
+        </p>
+      </div>
+
+      <div class="lg:col-span-3">
+        <p class="eyebrow text-paper/40">Site</p>
+        <nav class="mt-4 flex flex-col gap-2.5" aria-label="Footer">
+          {
+            nav.map((item) => (
+              <a href={item.href} class="text-sm text-paper/70 transition-colors hover:text-paper">
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <div class="lg:col-span-4">
+        <p class="eyebrow text-paper/40">Contact</p>
+        <div class="mt-4 space-y-3 text-sm text-paper/70">
+          <p>
+            <a href="mailto:greenafrica@amp10.company" class="text-leaf-bright hover:underline">
+              greenafrica@amp10.company
+            </a>
+          </p>
+          <p>0808 863 8672</p>
+          <p class="leading-relaxed">
+            9 Ikolaba GRA, Along Option Junction,<br />
+            Ibadan, Oyo State, Nigeria
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-14 flex flex-col gap-3 border-t border-paper/10 pt-6 text-xs text-paper/40 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>&copy; {year} Green Africa. Commercial operations held by Amp10 Limited.</p>
+      <p class="hidden sm:block">Photography: Pexels</p>
+      <p class="font-mono uppercase tracking-[0.18em]">Built in Nigeria. Verifiable anywhere.</p>
+    </div>
+  </div>
+</footer>

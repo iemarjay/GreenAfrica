@@ -1,0 +1,27 @@
+---
+interface Props {
+  eyebrow: string;
+  headline: string;
+  subhead?: string;
+}
+
+const { eyebrow, headline, subhead } = Astro.props;
+---
+
+<section class="container-x pb-14 pt-14 sm:pb-20 sm:pt-20">
+  <p class="eyebrow text-leaf" data-reveal>{eyebrow}</p>
+  <h1
+    class="mt-5 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl"
+    data-reveal
+    style="--d:80ms"
+  >
+    {headline}
+  </h1>
+  {
+    subhead && (
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink/70" data-reveal style="--d:160ms">
+        {subhead}
+      </p>
+    )
+  }
+</section>

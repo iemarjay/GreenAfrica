@@ -1,0 +1,147 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ClosingBand from "../components/ClosingBand.astro";
+import FramedPhoto from "../components/FramedPhoto.astro";
+import photos from "../data/photos.json";
+import imgInsert from "../assets/photos/step-insert.jpg";
+import imgVerify from "../assets/photos/verify-conveyor.jpg";
+import imgReward from "../assets/photos/pay-phone.jpg";
+import imgConsolidate from "../assets/photos/step-consolidate.jpg";
+import imgReconcile from "../assets/photos/record-ledger.jpg";
+
+const credit = (slug: keyof typeof photos) => `Photo: ${photos[slug].photographer} / Pexels`;
+
+const steps = [
+  {
+    number: "01",
+    title: "Insert",
+    paragraphs: [
+      "A recycler walks up to a Green Africa station. It looks like an ATM: an enclosed steel cabinet, weather-sealed, no exposed bin, no smell, nothing to vandalise. They feed in one bottle at a time.",
+      "One at a time is deliberate. It keeps the mechanism simple enough to repair with a screwdriver, and it means every single bottle gets its own verification and its own record. Machines that swallow a whole bag give you a guess. Ours gives you a count.",
+    ],
+    image: imgInsert,
+    imageAlt: photos["step-insert"].alt,
+    imageCredit: credit("step-insert"),
+  },
+  {
+    number: "02",
+    title: "Verify",
+    paragraphs: [
+      "Inside the chamber the bottle comes to rest in front of a fixed camera under controlled light. A small neural network running on the machine's onboard computer classifies it: is this PET, is it the right grade, is it the right shape? A load cell checks the weight — a full or part-full bottle is rejected, and so is a bottle that's been fed back in for a second payout.",
+      "The whole check takes about a second. No internet connection required.",
+    ],
+    image: imgVerify,
+    imageAlt: photos["verify-conveyor"].alt,
+    imageCredit: credit("verify-conveyor"),
+  },
+  {
+    number: "03",
+    title: "Reward",
+    paragraphs: [
+      "The machine sends airtime or data to the number the recycler entered. Value lands immediately.",
+      "We pay in airtime and data rather than cash for three reasons: it removes cash from a street-level machine, which removes the reason to attack it; it reaches people without bank accounts; and it's spendable the moment it arrives.",
+    ],
+    image: imgReward,
+    imageAlt: photos["pay-phone"].alt,
+    imageCredit: credit("pay-phone"),
+  },
+  {
+    number: "04",
+    title: "Record",
+    paragraphs: [
+      "The verified deposit is signed on the device and queued locally. When the machine has connectivity, the record is submitted to Hedera's consensus network. Because records are hash-chained on the device before they're sent, a gap in the network can't be used to quietly insert, alter or delete a deposit after the fact.",
+      "What ends up on the ledger: a timestamp, a machine identifier, a material classification and a weight. What doesn't: anyone's personal details.",
+    ],
+  },
+  {
+    number: "05",
+    title: "Consolidate",
+    paragraphs: [
+      "Machines are light-crush units at the edge — they compact bottles on the spot, because loose PET is mostly air and moving air by road is where collection margins die. Filled units are emptied on a route and consolidated at a central bale hub, where material is graded, baled and prepared for offtake.",
+    ],
+    streams: [
+      { material: "Clear PET", handling: "Primary stream — highest-value grade" },
+      { material: "Light-blue tinted PET", handling: "Accepted at a discount" },
+      { material: "Coloured PET", handling: "Segregated" },
+      { material: "PVC", handling: "Refused outright — a small amount ruins an entire PET batch" },
+    ],
+    image: imgConsolidate,
+    imageAlt: photos["step-consolidate"].alt,
+    imageCredit: credit("step-consolidate"),
+  },
+  {
+    number: "06",
+    title: "Reconcile",
+    paragraphs: [
+      "Every bale carries back to the deposits that made it. Machine-level records roll up to route level, route to hub, hub to shipment. When a tonne leaves the hub, the ledger can account for where it came from.",
+      "That reconciliation is the product. The plastic is just what it's made of.",
+    ],
+    image: imgReconcile,
+    imageAlt: photos["record-ledger"].alt,
+    imageCredit: credit("record-ledger"),
+  },
+];
+---
+
+<Base
+  title="How it works — Green Africa"
+  description="From bottle to bale to verified record. A walk through the Green Africa recovery and verification chain."
+>
+  <PageHero
+    eyebrow="How it works"
+    headline="From bottle to bale, with a receipt at every step."
+    subhead="Here's the whole chain, without the diagram-speak."
+  />
+
+  <div class="container-x pb-20 sm:pb-28">
+    <div class="border-t border-ink/10">
+      {
+        steps.map((step) => (
+          <section class="grid gap-6 border-b border-ink/10 py-12 sm:py-14 lg:grid-cols-12" data-reveal>
+            <div class="lg:col-span-4">
+              <p class="font-mono text-sm text-leaf">Step {step.number}</p>
+              <h2 class="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">{step.title}</h2>
+            </div>
+            <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-7 lg:col-start-6">
+              {step.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+
+              {step.image && (
+                <FramedPhoto
+                  src={step.image}
+                  alt={step.imageAlt}
+                  credit={step.imageCredit}
+                  ratio="aspect-[16/9]"
+                  class="mt-2"
+                />
+              )}
+
+              {step.streams && (
+                <div class="mt-2 border border-ink/15">
+                  <p class="border-b border-ink/15 bg-sand/60 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+                    What the machine accepts
+                  </p>
+                  <dl>
+                    {step.streams.map((stream) => (
+                      <div class="grid gap-1 border-b border-ink/10 px-4 py-3 last:border-b-0 sm:grid-cols-3 sm:gap-4">
+                        <dt class="text-sm font-semibold">{stream.material}</dt>
+                        <dd class="text-sm text-ink/65 sm:col-span-2">{stream.handling}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              )}
+            </div>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+
+  <ClosingBand
+    headline="Questions we're happy to answer properly."
+    body="How do you handle contamination? What's the uptime? What happens when someone tries to game it? Ask — we'll give you the real answer, including the parts that are still hard."
+  />
+</Base>

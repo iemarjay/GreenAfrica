@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+
+const nav = [
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/for-brands", label: "For Brands" },
+  { href: "/for-partners", label: "For Partners" },
+  { href: "/technology", label: "Technology" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  pathname === href || pathname.startsWith(href + "/");
+---
+
+<header class="sticky top-0 z-50 border-b border-ink/10 bg-paper/95 backdrop-blur-sm">
+  <div class="container-x flex h-16 items-center justify-between gap-6">
+    <a href="/" class="flex shrink-0 items-center" aria-label="Green Africa — home">
+      <Image src={logo} alt="Green Africa" height={34} class="h-8 w-auto sm:h-9" loading="eager" />
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Primary">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "nav-link text-[13px] font-medium tracking-tight transition-colors",
+              isActive(item.href)
+                ? "text-leaf"
+                : "text-ink/70 hover:text-ink",
+            ]}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/contact" class="btn-primary !px-4 !py-2 text-[13px]">Talk to us</a>
+    </nav>
+
+    <button
+      id="menu-button"
+      type="button"
+      class="flex h-10 w-10 items-center justify-center border border-ink/20 lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Toggle navigation menu"
+    >
+      <svg id="icon-open" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M2 4.5h14M2 9h14M2 13.5h14" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <svg id="icon-close" width="18" height="18" viewBox="0 0 18 18" fill="none" class="hidden" aria-hidden="true">
+        <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" class="hidden border-t border-ink/10 bg-paper lg:hidden" aria-label="Mobile">
+    <div class="container-x flex flex-col py-4">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "border-b border-ink/5 py-3 text-sm font-medium",
+              isActive(item.href) ? "text-leaf" : "text-ink/80",
+            ]}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a href="/contact" class="btn-primary mt-4">Talk to us</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const button = document.getElementById("menu-button");
+  const panel = document.getElementById("mobile-nav");
+  const iconOpen = document.getElementById("icon-open");
+  const iconClose = document.getElementById("icon-close");
+
+  button?.addEventListener("click", () => {
+    const expanded = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", String(!expanded));
+    panel?.classList.toggle("hidden");
+    iconOpen?.classList.toggle("hidden");
+    iconClose?.classList.toggle("hidden");
+  });
+</script>

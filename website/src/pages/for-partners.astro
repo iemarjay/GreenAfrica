@@ -1,0 +1,177 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ClosingBand from "../components/ClosingBand.astro";
+import FramedPhoto from "../components/FramedPhoto.astro";
+import photos from "../data/photos.json";
+import imgOfftake from "../assets/photos/partners-offtake.jpg";
+import imgHost from "../assets/photos/partners-host.jpg";
+import imgCollectors from "../assets/photos/partners-collectors.jpg";
+import imgNgo from "../assets/photos/partners-ngo.jpg";
+
+const credit = (slug: keyof typeof photos) => `Photo: ${photos[slug].photographer} / Pexels`;
+
+const hostBenefits = [
+  "No capital cost, no maintenance cost, no staffing. We fund, install, service and empty.",
+  "An enclosed cabinet — closer to an ATM than a bin. No open waste, no odour, no overflow.",
+  "A servicing schedule we hold to, in writing.",
+  "Recovery data for your own reporting, if you want it.",
+];
+---
+
+<Base
+  title="Offtake, collection and partnership — Green Africa"
+  description="Segregated clear PET with documented chain of custody, and partnerships with recyclers, collectors, site hosts and NGOs."
+>
+  <PageHero
+    eyebrow="For partners"
+    headline="We do one part of this well and we'd rather partner for the rest."
+    subhead="Green Africa is a verification and recovery layer. We're not trying to become everybody's competitor."
+  />
+
+  <!-- Recyclers & offtakers -->
+  <section class="rule-t">
+    <div class="container-x py-16 sm:py-20">
+      <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-6" data-reveal>
+          <p class="eyebrow text-leaf">01 — For recyclers and offtakers</p>
+          <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance">
+            Clean feedstock, documented.
+          </h2>
+        </div>
+        <div class="lg:col-span-5 lg:col-start-8" data-reveal style="--d:120ms">
+          <FramedPhoto
+            src={imgOfftake}
+            alt={photos["partners-offtake"].alt}
+            credit={credit("partners-offtake")}
+            ratio="aspect-[16/9]"
+          />
+        </div>
+      </div>
+
+      <div class="mt-10 grid gap-px border border-ink/10 bg-ink/10 lg:grid-cols-2">
+        <div class="bg-paper p-7 sm:p-9" data-reveal>
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-leaf">What we supply</p>
+          <p class="mt-4 text-base leading-relaxed text-ink/75">
+            Baled PET, source-segregated, with clear and light-blue streams kept apart from
+            coloured. PVC excluded at the point of deposit rather than sorted out later. Chain of
+            custody documented from deposit to bale.
+          </p>
+        </div>
+        <div class="bg-paper p-7 sm:p-9" data-reveal style="--d:120ms">
+          <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">
+            What we don't do
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-ink/75">
+            Pelletising. We stop at flake and bale, deliberately. Pelletising is a power-intensive
+            business and Nigeria's power situation makes it a poor bet for a company our size. We'd
+            rather feed the people who already do it well than do it badly ourselves.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-8 max-w-2xl text-base leading-relaxed text-ink/75">
+        If you process PET and you're tired of buying bales with a surprise inside,
+        <a href="mailto:greenafrica@amp10.company" class="font-medium text-leaf hover:underline">
+          talk to us about volume and specification</a
+        >.
+      </p>
+    </div>
+  </section>
+
+  <!-- Site hosts -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">02 — For site hosts</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          A machine that improves the space it sits in.
+        </h2>
+        <p class="mt-5 text-base leading-relaxed text-ink/75">
+          We place stations at universities, gyms, malls, offices, transport hubs and event venues.
+        </p>
+        <FramedPhoto
+          src={imgHost}
+          alt={photos["partners-host"].alt}
+          credit={credit("partners-host")}
+          class="mt-8"
+        />
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <ul class="border-t border-ink/10">
+          {
+            hostBenefits.map((benefit) => (
+              <li class="flex gap-4 border-b border-ink/10 py-4 text-base leading-relaxed text-ink/75">
+                <span class="mt-2 inline-block h-1.5 w-1.5 shrink-0 bg-leaf" aria-hidden="true" />
+                {benefit}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-6 text-base leading-relaxed text-ink/75">
+          We know the reputation campus recycling installations have, because the first thing most
+          site managers tell us is about the last one that was abandoned in place. Ask us about our
+          servicing commitment before anything else. We'd rather be judged on that.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collectors & aggregators -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">03 — For collectors and aggregators</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          Get paid for proof, not just for weight.
+        </h2>
+        <FramedPhoto
+          src={imgCollectors}
+          alt={photos["partners-collectors"].alt}
+          credit={credit("partners-collectors")}
+          class="mt-8"
+        />
+      </div>
+      <div class="text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          If you're already moving material, our field verification tools let your recoveries carry
+          a record — lot-level capture, weighed on trade-certified scales, photographed and logged.
+          Verified volume is worth more than unverified volume to the buyers now entering this
+          market. We'd rather extend the verification layer to people already doing the work than
+          rebuild a collection network that exists.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NGOs -->
+  <section class="bg-sand/60">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">04 — For NGOs and community organisations</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          Awareness that ends in a machine.
+        </h2>
+        <FramedPhoto
+          src={imgNgo}
+          alt={photos["partners-ngo"].alt}
+          credit={credit("partners-ngo")}
+          class="mt-8"
+        />
+      </div>
+      <div class="text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          Green Africa runs its community, education and awareness work through a registered
+          Nigerian non-profit structure, held separately from our commercial operations. If you run
+          environmental programming and want the behaviour change to land somewhere measurable, a
+          station at your site closes the loop between the message and the material.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ClosingBand
+    headline="Tell us which of these you are."
+    body="Recycler, site host, collector, NGO — one inbox reaches the right person."
+  />
+</Base>

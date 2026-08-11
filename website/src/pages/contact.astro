@@ -1,0 +1,104 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+
+const prompts = [
+  {
+    lead: "I want a machine at my site",
+    text: "Where it is, roughly how much footfall, and who makes the decision.",
+  },
+  {
+    lead: "I have EPR or reporting obligations",
+    text: "What your filing or assurance process needs to evidence.",
+  },
+  {
+    lead: "I buy or process PET",
+    text: "Your specification and monthly volume.",
+  },
+  {
+    lead: "I already collect material",
+    text: "Where you operate and roughly what you move.",
+  },
+  {
+    lead: "I'm a funder",
+    text: "What outcome you're funding and how you need it reported.",
+  },
+  {
+    lead: "Something else",
+    text: "Just say it.",
+  },
+];
+---
+
+<Base
+  title="Contact Green Africa"
+  description="Get in touch about machines, offtake, partnerships or recovery data."
+>
+  <PageHero
+    eyebrow="Contact"
+    headline="Write to us."
+    subhead="One inbox, read by people who can actually answer. Tell us which of these you are and we'll skip the back-and-forth."
+  />
+
+  <section class="rule-t">
+    <div class="container-x grid gap-12 py-16 sm:py-20 lg:grid-cols-12">
+      <!-- What to tell us -->
+      <div class="lg:col-span-7">
+        <p class="eyebrow text-leaf">What to tell us</p>
+        <div class="mt-8 border-t border-ink/10">
+          {
+            prompts.map((prompt, index) => (
+              <div
+                class="grid gap-1 border-b border-ink/10 py-5 sm:grid-cols-2 sm:gap-6"
+                data-reveal
+                style={`--d:${index * 50}ms`}
+              >
+                <p class="font-semibold tracking-tight">{prompt.lead}</p>
+                <p class="text-sm leading-relaxed text-ink/65">{prompt.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Details -->
+      <div class="lg:col-span-4 lg:col-start-9">
+        <div class="border border-ink/15 bg-paper" data-reveal style="--d:150ms">
+          <p class="border-b border-ink/15 bg-sand/60 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+            Details
+          </p>
+          <div class="space-y-6 px-5 py-6">
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">Email</p>
+              <a
+                href="mailto:greenafrica@amp10.company"
+                class="mt-1.5 block break-all font-medium text-leaf hover:underline"
+              >
+                greenafrica@amp10.company
+              </a>
+            </div>
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">Phone</p>
+              <a href="tel:+2348088638672" class="mt-1.5 block font-medium hover:underline">
+                0808 863 8672
+              </a>
+            </div>
+            <div>
+              <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/50">Office</p>
+              <p class="mt-1.5 text-sm leading-relaxed text-ink/75">
+                9 Ikolaba GRA, Along Option Junction,<br />
+                Ibadan, Oyo State, Nigeria
+              </p>
+            </div>
+          </div>
+          <div class="border-t border-ink/15 bg-pine px-5 py-4">
+            <p class="text-sm leading-relaxed text-paper/80">
+              We reply to everything within two working days. If we're not the right people for
+              what you need, we'll say so and point you at who is.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

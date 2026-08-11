@@ -1,0 +1,325 @@
+---
+import { Image } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import ClosingBand from "../components/ClosingBand.astro";
+import FramedPhoto from "../components/FramedPhoto.astro";
+import photos from "../data/photos.json";
+import heroMachine from "../assets/hero-machine.png";
+import imgProblem from "../assets/photos/problem-street.jpg";
+import imgVerify from "../assets/photos/verify-conveyor.jpg";
+import imgPay from "../assets/photos/pay-phone.jpg";
+import imgRecord from "../assets/photos/record-ledger.jpg";
+import imgFabrication from "../assets/photos/proof-fabrication.jpg";
+
+const credit = (slug: keyof typeof photos) => `Photo: ${photos[slug].photographer} / Pexels`;
+
+const whatWeDo = [
+  {
+    number: "01",
+    title: "We verify at the point of recovery",
+    body: "Our machines use onboard computer vision and a load cell to confirm that what went in is an empty PET bottle — not a filled one, not a look-alike, not the same bottle twice. Verification happens inside a sealed chamber where lighting and camera position are fixed, which is why it's accurate and why it's cheap.",
+    image: imgVerify,
+    imageAlt: photos["verify-conveyor"].alt,
+  },
+  {
+    number: "02",
+    title: "We pay instantly",
+    body: "No points to redeem later. No app store queue. Airtime or mobile data lands on the recycler's phone within seconds of the bottle dropping. It's the difference between a good idea and something people use twice.",
+    image: imgPay,
+    imageAlt: photos["pay-phone"].alt,
+  },
+  {
+    number: "03",
+    title: "We record permanently",
+    body: "Each verified deposit is written to Hedera, a public distributed ledger. The record is timestamped, tamper-evident and independently checkable — by you, by an auditor, by a regulator, without asking us for permission.",
+    image: imgRecord,
+    imageAlt: photos["record-ledger"].alt,
+  },
+];
+
+const audiences = [
+  {
+    label: "If you drink from a bottle",
+    text: "Bring it back, get paid.",
+    cta: "Find a machine",
+    href: "/contact",
+  },
+  {
+    label: "If you put plastic on the market",
+    text: "Get recovery data you can put in a compliance filing.",
+    cta: "For brands",
+    href: "/for-brands",
+  },
+  {
+    label: "If you buy or process recovered PET",
+    text: "Get baled, segregated feedstock with a documented chain of custody.",
+    cta: "For partners",
+    href: "/for-partners",
+  },
+  {
+    label: "If you fund environmental outcomes",
+    text: "Get reporting that doesn't depend on trusting us.",
+    cta: "Talk to us",
+    href: "/contact",
+  },
+];
+---
+
+<Base
+  title="Green Africa — Verified plastic recovery infrastructure"
+  description="AI-powered reverse vending machines that pay recyclers instantly and record every bottle on a public ledger. Built and fabricated in Nigeria."
+>
+  <!-- Hero -->
+  <section class="container-x pb-16 pt-14 sm:pb-24 sm:pt-20">
+    <div class="grid items-start gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-7">
+        <p class="eyebrow text-leaf" data-reveal>Verified plastic recovery infrastructure — Nigeria</p>
+        <h1
+          class="mt-5 text-4xl font-semibold leading-[1.04] tracking-tight text-balance sm:text-5xl lg:text-6xl"
+          data-reveal
+          style="--d:90ms"
+        >
+          Every bottle counted. Every claim provable.
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink/70" data-reveal style="--d:180ms">
+          Green Africa builds reverse vending machines that verify a plastic bottle, pay the person
+          who brought it in seconds, and write a permanent record of the transaction to a public
+          ledger. We're building the layer African recycling has been missing: proof.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-4" data-reveal style="--d:270ms">
+          <a href="/how-it-works" class="btn-primary">See how it works</a>
+          <a href="/contact" class="btn-outline">Talk to us</a>
+        </div>
+      </div>
+
+      <div class="min-w-0 lg:col-span-5" data-reveal style="--d:200ms">
+        <figure class="border border-ink/15 bg-white">
+          <Image
+            src={heroMachine}
+            alt="A Green Africa reverse vending station installed in Nigeria"
+            widths={[640, 960, 1400]}
+            sizes="(min-width: 1024px) 40vw, 100vw"
+            class="w-full"
+            loading="eager"
+          />
+          <figcaption
+            class="flex items-center justify-between gap-4 border-t border-ink/10 px-4 py-2.5"
+          >
+            <span class="ledger-chip text-ink/60">GA-IBD-004 — Ibadan</span>
+            <span class="ledger-chip inline-flex items-center gap-1.5 text-leaf">
+              <span class="inline-block h-1.5 w-1.5 animate-pulse bg-leaf" aria-hidden="true"></span>
+              Verified deposit <span id="deposit-count">#0417</span>
+            </span>
+          </figcaption>
+          <div class="border-t border-ink/10 bg-ink px-4 py-3">
+            <div class="flex items-center">
+              <code
+                id="ledger-line"
+                class="ledger-chip min-w-0 flex-1 overflow-x-auto whitespace-nowrap text-mint/80"
+                >{"{"}"ts":"2026-08-06T14:32:11Z","machine":"GA-IBD-004","material":"PET-CLEAR","weight_g":24,"status":"verified"{"}"}</code
+              ><span class="ledger-cursor shrink-0" aria-hidden="true"></span>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fact strip -->
+  <section class="border-y border-ink/10 bg-sand/60">
+    <div class="container-x grid gap-px sm:grid-cols-3">
+      <div class="py-7 sm:pr-8" data-reveal>
+        <p class="font-mono text-2xl font-medium tracking-tight">1st place</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink/60">
+          Overall winner, 2025 Hedera Africa Hackathon — 1,300+ submissions
+        </p>
+      </div>
+      <div class="border-t border-ink/10 py-7 sm:border-l sm:border-t-0 sm:px-8" data-reveal style="--d:100ms">
+        <p class="font-mono text-2xl font-medium tracking-tight">
+          <span data-countup="100" data-suffix="%">100%</span>
+        </p>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink/60">
+          of machines fabricated in Nigeria, repairable with local parts
+        </p>
+      </div>
+      <div class="border-t border-ink/10 py-7 sm:border-l sm:border-t-0 sm:pl-8" data-reveal style="--d:200ms">
+        <p class="font-mono text-2xl font-medium tracking-tight">1 bottle = 1 record</p>
+        <p class="mt-1.5 text-sm leading-relaxed text-ink/60">
+          Every verified deposit written to a public ledger, checkable by anyone
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- The problem -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-24 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">01 — The problem</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          Africa doesn't have a collection problem. It has a verification problem.
+        </h2>
+        <FramedPhoto
+          src={imgProblem}
+          alt={photos["problem-street"].alt}
+          credit={credit("problem-street")}
+          class="mt-8"
+        />
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          Plastic already moves. Informal collectors, aggregators and recyclers shift enormous
+          volumes every day across Nigerian cities. What almost none of it carries is a trustworthy
+          record — who recovered it, where, when, and whether the tonnage on the invoice matches the
+          tonnage in the yard.
+        </p>
+        <p>
+          That gap has a price. Brands with extended producer responsibility obligations can't
+          substantiate what they've funded. Credit buyers can't distinguish a real tonne from a
+          double-counted one. Funders write cheques against reports nobody can independently check.
+          And the person who actually did the work — the one carrying a sack of bottles across town —
+          gets paid last and least.
+        </p>
+        <p class="font-medium text-ink">We started at that last point and worked backwards.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we do -->
+  <section class="rule-t">
+    <div class="container-x py-16 sm:py-24">
+      <p class="eyebrow text-leaf">02 — What we do</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        Three things, tightly connected.
+      </h2>
+
+      <div class="mt-12 grid gap-px border border-ink/10 bg-ink/10 md:grid-cols-3">
+        {
+          whatWeDo.map((block, index) => (
+            <article class="bg-paper" data-reveal style={`--d:${index * 100}ms`}>
+              <Image
+                src={block.image}
+                alt={block.imageAlt}
+                widths={[480, 768]}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                class="aspect-[16/10] w-full object-cover"
+              />
+              <div class="p-7 sm:p-8">
+                <p class="font-mono text-sm text-leaf">{block.number}</p>
+                <h3 class="mt-4 text-xl font-semibold tracking-tight">{block.title}</h3>
+                <p class="mt-4 text-sm leading-relaxed text-ink/70">{block.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for -->
+  <section class="rule-t">
+    <div class="container-x py-16 sm:py-24">
+      <p class="eyebrow text-leaf">03 — Who it's for</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+        One machine, four audiences.
+      </h2>
+
+      <div class="mt-12 border-t border-ink/10">
+        {
+          audiences.map((audience, index) => (
+            <a
+              href={audience.href}
+              class="group grid gap-2 border-b border-ink/10 py-6 transition-colors hover:bg-sand/50 sm:grid-cols-12 sm:items-baseline sm:gap-6"
+              data-reveal
+              style={`--d:${index * 60}ms`}
+            >
+              <p class="font-semibold tracking-tight sm:col-span-4 sm:pl-2">{audience.label}</p>
+              <p class="text-sm leading-relaxed text-ink/65 sm:col-span-6">{audience.text}</p>
+              <p class="font-mono text-xs uppercase tracking-[0.18em] text-leaf sm:col-span-2 sm:pr-2 sm:text-right">
+                {audience.cta}
+                <span aria-hidden="true" class="ml-1 inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof point -->
+  <section class="bg-sand/60">
+    <div class="container-x grid gap-10 py-16 sm:py-24 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">04 — Proof point</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+          Built here, and it works.
+        </h2>
+        <FramedPhoto
+          src={imgFabrication}
+          alt={photos["proof-fabrication"].alt}
+          credit={credit("proof-fabrication")}
+          class="mt-8"
+        />
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          Green Africa won first place overall at the 2025 Hedera Africa Hackathon — the cross-track
+          championship, out of more than 1,300 submissions from over 13,000 developers across the
+          continent. The prize funds the deployment now underway.
+        </p>
+        <p>
+          Every machine is fabricated in Nigeria. That's not a slogan about local content; it's the
+          only way the unit economics work. An imported reverse vending machine costs more than the
+          plastic it will ever collect. Ours doesn't.
+        </p>
+        <a href="/about" class="inline-flex items-center gap-2 font-medium text-leaf hover:underline">
+          More about us <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ClosingBand
+    headline="Want the detail?"
+    body="We'd rather have a real conversation than send you a brochure. Tell us who you are and what you need to know — offtake terms, EPR reporting, siting a machine, or how the ledger records actually work."
+  />
+
+  <script>
+    const ledgerRecords = [
+      '{"ts":"2026-08-06T14:32:11Z","machine":"GA-IBD-004","material":"PET-CLEAR","weight_g":24,"status":"verified"}',
+      '{"ts":"2026-08-06T14:33:02Z","machine":"GA-IBD-004","material":"PET-CLEAR","weight_g":31,"status":"verified"}',
+      '{"ts":"2026-08-06T14:33:47Z","machine":"GA-LOS-002","material":"PET-LIGHTBLUE","weight_g":22,"status":"verified"}',
+      '{"ts":"2026-08-06T14:34:19Z","machine":"GA-IBD-004","material":"PET-CLEAR","weight_g":27,"status":"verified"}',
+      '{"ts":"2026-08-06T14:35:08Z","machine":"GA-LOS-002","material":"PET-CLEAR","weight_g":19,"status":"verified"}',
+    ];
+
+    const line = document.getElementById("ledger-line");
+    const depositCount = document.getElementById("deposit-count");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (line && !reducedMotion) {
+      let recordIndex = 0;
+      let count = 417;
+
+      const typeNextRecord = () => {
+        const text = ledgerRecords[recordIndex % ledgerRecords.length];
+        let charIndex = 0;
+        line.textContent = "";
+
+        const typer = window.setInterval(() => {
+          line.textContent = text.slice(0, ++charIndex);
+          if (charIndex >= text.length) {
+            window.clearInterval(typer);
+            if (depositCount) {
+              depositCount.textContent = "#" + String(++count).padStart(4, "0");
+            }
+            recordIndex++;
+            window.setTimeout(typeNextRecord, 2800);
+          }
+        }, 16);
+      };
+
+      window.setTimeout(typeNextRecord, 1600);
+    }
+  </script>
+</Base>

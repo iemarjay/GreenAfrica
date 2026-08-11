@@ -1,0 +1,157 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ClosingBand from "../components/ClosingBand.astro";
+import FramedPhoto from "../components/FramedPhoto.astro";
+import photos from "../data/photos.json";
+import imgCity from "../assets/photos/about-city.jpg";
+
+const entities = [
+  {
+    name: "Green Africa (Incorporated Trustees)",
+    text: "A registered Nigerian non-profit carrying the community, education, awareness and collection-mobilisation work, and the grant funding attached to it.",
+  },
+  {
+    name: "Amp10 Limited",
+    text: "The commercial entity holding trade, export and investment activity.",
+  },
+];
+---
+
+<Base
+  title="About Green Africa"
+  description="Who we are, how we're structured, and what we're actually trying to build."
+>
+  <PageHero
+    eyebrow="About"
+    headline="We're building the boring layer."
+    subhead="Not a movement. Not an app. The plumbing that lets everything above it be trusted."
+  />
+
+  <!-- Why we exist -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">01 — Why we exist</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          Unprovable work doesn't attract capital.
+        </h2>
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          Plastic recovery in Nigeria doesn't fail for lack of effort. It fails because the effort
+          can't be proved, and unprovable work doesn't attract capital.
+        </p>
+        <p>
+          Brands can't fund what they can't report. Credit markets can't price what they can't
+          verify. Funders can't scale what they can't audit. Meanwhile the collector at the bottom
+          of the chain — who is doing the actual environmental work — captures the smallest share
+          of value, because they hold the material and not the evidence.
+        </p>
+        <p class="font-medium text-ink">We decided the evidence was the thing worth building.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What we chose not to build -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">02 — What we chose not to build</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          Deliberately narrow. Deliberately asset-light.
+        </h2>
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          We're not trying to become Nigeria's largest aggregator. We're not building pelletising
+          capacity. We're not importing machines.
+        </p>
+        <p>
+          Each of those is a capital-heavy business with someone already better at it than us. Our
+          position is deliberately narrow and deliberately asset-light: verify at the point of
+          recovery, prove it, and let the value of proof flow to the people who earned it.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recognition -->
+  <section class="bg-pine text-paper">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf-bright">03 — Recognition</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          First place overall, 2025 Hedera Africa Hackathon.
+        </h2>
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-paper/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          Green Africa won first place overall and the cross-track championship at the 2025 Hedera
+          Africa Hackathon, competing against more than 1,300 submissions from over 13,000
+          developers. That prize is funding the deployment now in progress.
+        </p>
+        <p>
+          It's a good validation and a real cheque; it isn't a business. The machines going into
+          the ground are the business.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How we're structured -->
+  <section class="rule-t">
+    <div class="container-x py-16 sm:py-20">
+      <p class="eyebrow text-leaf">04 — How we're structured</p>
+      <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance">
+        Two entities, kept deliberately separate.
+      </h2>
+
+      <div class="mt-10 grid gap-px border border-ink/10 bg-ink/10 md:grid-cols-2">
+        {
+          entities.map((entity, index) => (
+            <article class="bg-paper p-7 sm:p-9" data-reveal style={`--d:${index * 120}ms`}>
+              <h3 class="text-lg font-semibold tracking-tight">{entity.name}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-ink/70">{entity.text}</p>
+            </article>
+          ))
+        }
+      </div>
+
+      <p class="mt-8 max-w-2xl text-base leading-relaxed text-ink/75">
+        The separation is intentional. Grant money and trading revenue shouldn't share a bank
+        account, and funders are right to ask which one they're funding.
+      </p>
+    </div>
+  </section>
+
+  <!-- Where we are -->
+  <section class="bg-sand/60">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">05 — Where we are</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          The problem is local, and so is the answer.
+        </h2>
+        <FramedPhoto
+          src={imgCity}
+          alt={photos["about-city"].alt}
+          credit={`Photo: ${photos["about-city"].photographer} / Pexels`}
+          class="mt-8"
+        />
+      </div>
+      <div class="text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          Founded and operating in Nigeria, with offices in Ibadan and operations across Lagos and
+          Oyo States. Hardware is fabricated locally. The team is local. The problem is local, and
+          so is the answer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ClosingBand
+    headline="Come and see one."
+    body="The best version of this conversation happens standing in front of a machine. If you're in Lagos or Ibadan, we'll show you."
+  />
+</Base>

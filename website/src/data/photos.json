@@ -1,0 +1,86 @@
+{
+  "problem-street": {
+    "photographer": "Chris F",
+    "photographerUrl": "https://www.pexels.com/@chris-f-38966",
+    "pexelsUrl": "https://www.pexels.com/photo/a-water-bottle-on-the-ground-8891518/",
+    "alt": "Close-up of a plastic water bottle discarded on gravel near a chain-link fence."
+  },
+  "verify-conveyor": {
+    "photographer": "Mumtahina Tanni",
+    "photographerUrl": "https://www.pexels.com/@mumtahina-tanni-1080117",
+    "pexelsUrl": "https://www.pexels.com/photo/a-woman-collecting-plastic-bottles-5269922/",
+    "alt": "Woman collecting and sorting plastic bottles for recycling in Chattogram, Bangladesh."
+  },
+  "pay-phone": {
+    "photographer": "Gustavo Fring",
+    "photographerUrl": "https://www.pexels.com/@gustavo-fring",
+    "pexelsUrl": "https://www.pexels.com/photo/man-with-dreadlocks-looking-at-his-smartphone-6720605/",
+    "alt": "Smiling man with dreadlocks in blue sweater using smartphone by fence on sunny day."
+  },
+  "record-ledger": {
+    "photographer": "RDNE Stock project",
+    "photographerUrl": "https://www.pexels.com/@rdne",
+    "pexelsUrl": "https://www.pexels.com/photo/checklist-on-a-clipboard-8293635/",
+    "alt": "Close-up of hands holding a home inspection checklist clipboard for buyers."
+  },
+  "proof-fabrication": {
+    "photographer": "Dogan şimşek",
+    "photographerUrl": "https://www.pexels.com/@dogan-simsek-2160139073",
+    "pexelsUrl": "https://www.pexels.com/photo/industrial-welding-process-with-sparking-weld-37517094/",
+    "alt": "Close-up of a welding process in a dark workshop showing bright sparks and protective gear."
+  },
+  "step-insert": {
+    "photographer": "Towfiqu barbhuiya",
+    "photographerUrl": "https://www.pexels.com/@towfiqu-barbhuiya-3440682",
+    "pexelsUrl": "https://www.pexels.com/photo/a-person-throwing-a-plastic-bottle-13308385/",
+    "alt": "Close-up of a person dropping a plastic bottle into a recycling bin surrounded by greenery."
+  },
+  "step-consolidate": {
+    "photographer": "Gaurav Ranjitkar",
+    "photographerUrl": "https://www.pexels.com/@gaurav-ranjitkar-2476729",
+    "pexelsUrl": "https://www.pexels.com/photo/plastic-bottles-pressed-into-cubes-14370990/",
+    "alt": "Stacked compressed plastic bottles at a recycling facility, ready for processing."
+  },
+  "brands-compliance": {
+    "photographer": "Pavel Danilyuk",
+    "photographerUrl": "https://www.pexels.com/@pavel-danilyuk",
+    "pexelsUrl": "https://www.pexels.com/photo/a-person-holding-a-financial-statement-7658352/",
+    "alt": "Hands holding and reviewing balance sheets over a desk with a keyboard and stationery."
+  },
+  "partners-offtake": {
+    "photographer": "CP Khanal",
+    "photographerUrl": "https://www.pexels.com/@cpkhanal",
+    "pexelsUrl": "https://www.pexels.com/photo/workers-sorting-waste-at-plant-in-butwal-nepal-36751332/",
+    "alt": "Workers sorting waste in a recycling facility in Butwal, Nepal, showcasing environmental sustainability efforts."
+  },
+  "partners-host": {
+    "photographer": "ready made",
+    "photographerUrl": "https://www.pexels.com/@readymade",
+    "pexelsUrl": "https://www.pexels.com/photo/number-four-on-entrance-door-and-stairs-of-modern-building-3964582/",
+    "alt": "From below of modern building facade with number four on glass entrance door and stairs"
+  },
+  "partners-collectors": {
+    "photographer": "Blue Ox Studio",
+    "photographerUrl": "https://www.pexels.com/@blue-ox-studio-218748",
+    "pexelsUrl": "https://www.pexels.com/photo/two-girls-walking-near-the-concrete-house-2063890/",
+    "alt": "Smiling women in Arusha, Tanzania carrying a sack over traditional attire in a village setting."
+  },
+  "partners-ngo": {
+    "photographer": "Lagos Food Bank Initiative",
+    "photographerUrl": "https://www.pexels.com/@lagosfoodbank",
+    "pexelsUrl": "https://www.pexels.com/photo/a-volunteer-woman-doing-high-five-with-children-8042458/",
+    "alt": "A woman engages with children through a high-five in a vibrant community setting."
+  },
+  "tech-repair": {
+    "photographer": "Maikol Herrera",
+    "photographerUrl": "https://www.pexels.com/@maiksax",
+    "pexelsUrl": "https://www.pexels.com/photo/close-up-of-circuit-board-soldering-process-38145576/",
+    "alt": "Technician performing precise soldering on a circuit board for electronics repair."
+  },
+  "about-city": {
+    "photographer": "Fawaz Onakoya",
+    "photographerUrl": "https://www.pexels.com/@fawaz-onakoya-316476857",
+    "pexelsUrl": "https://www.pexels.com/photo/modern-lagos-skyline-with-watercraft-in-lagoon-37405043/",
+    "alt": "Scenic view of Lagos skyline featuring modern buildings and a motorboat in the lagoon under a bright sky."
+  }
+}

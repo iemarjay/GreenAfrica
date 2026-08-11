@@ -1,0 +1,173 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHero from "../components/PageHero.astro";
+import ClosingBand from "../components/ClosingBand.astro";
+import FramedPhoto from "../components/FramedPhoto.astro";
+import photos from "../data/photos.json";
+import imgRepair from "../assets/photos/tech-repair.jpg";
+
+const machineSpecs = [
+  { part: "Compute", detail: "Single-board computer, no accelerator, no cloud call" },
+  { part: "Vision", detail: "Camera module in a fixed, controlled-light classification chamber" },
+  { part: "Weight", detail: "Load cell for weight verification" },
+  { part: "Insertion", detail: "Infrared sensor for insertion detection" },
+  { part: "Gate", detail: "Servo-actuated — accepts or rejects" },
+  { part: "Cabinet", detail: "Steel, fabricated locally" },
+];
+
+const repairPoints = [
+  "Locally fabricated cabinet",
+  "Commodity compute",
+  "Standard connectors",
+  "Parts obtainable in Lagos or Ibadan",
+];
+---
+
+<Base
+  title="Technology — Green Africa"
+  description="Onboard computer vision, offline-first records and Hedera consensus logging, built for African operating conditions."
+>
+  <PageHero
+    eyebrow="Technology"
+    headline="Engineered around the constraints, not despite them."
+    subhead="Intermittent power. Patchy connectivity. Import costs that make European hardware a non-starter. Every technical decision here starts from those facts."
+  />
+
+  <!-- The machine -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">01 — The machine</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          Choosing the constraint is the design.
+        </h2>
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          The classification chamber is where the cleverness sits. By fixing the camera,
+          controlling the lighting and taking one bottle at a time, we reduce a hard computer
+          vision problem — object detection in an uncontrolled scene — to an easy one:
+          single-object classification under known conditions. That's what lets a small quantized
+          model run accurately on inexpensive hardware with no accelerator and no cloud call.
+        </p>
+        <p>
+          Machines that accept a whole bag of mixed material need far more compute, far more
+          mechanism and far more maintenance, to produce a less trustworthy count.
+        </p>
+
+        <div class="mt-2 border border-ink/15">
+          <p class="border-b border-ink/15 bg-sand/60 px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+            Inside a station
+          </p>
+          <dl>
+            {
+              machineSpecs.map((spec) => (
+                <div class="grid gap-1 border-b border-ink/10 px-4 py-3 last:border-b-0 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-mono text-xs uppercase tracking-[0.14em] text-ink/50">
+                    {spec.part}
+                  </dt>
+                  <dd class="text-sm text-ink/75 sm:col-span-2">{spec.detail}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offline-first -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">02 — Offline-first by default</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          Designed to work with no network at all.
+        </h2>
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          Records are signed on the device the moment a deposit is verified, then written to a
+          local hash-chained store. Each record includes the hash of the one before it, so any
+          later alteration breaks the chain visibly. When connectivity returns, the queue submits
+          to the ledger in order.
+        </p>
+        <p>
+          Practically: the machine keeps paying, keeps counting and keeps its evidential integrity
+          through an outage. Nothing is lost and nothing can be quietly rewritten in the gap.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why a public ledger -->
+  <section class="rule-t">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf">03 — Why a public ledger</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          A filing cabinet nobody can break into.
+        </h2>
+      </div>
+      <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <p>
+          We record deposits on Hedera. The reason is narrow and specific: we want the recovery
+          record to be checkable by people who have no reason to trust us.
+        </p>
+        <p>
+          A database we control is only ever as credible as our reputation. A public consensus
+          record is checkable independently, with timestamps we can't backdate and entries we can't
+          delete. For a claim that will end up in a compliance filing or an assurance process, that
+          difference is the entire point.
+        </p>
+        <p>
+          We use Hedera specifically for transaction costs low enough to justify writing a record
+          for a single bottle, and finality fast enough to matter operationally.
+        </p>
+        <p>
+          We are not issuing a token to the public, and there's nothing here to speculate on. The
+          ledger is a filing cabinet nobody can break into.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Built to be fixed -->
+  <section class="bg-pine text-paper">
+    <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5" data-reveal>
+        <p class="eyebrow text-leaf-bright">04 — Built to be fixed</p>
+        <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
+          Still running in year three.
+        </h2>
+        <FramedPhoto
+          src={imgRepair}
+          alt={photos["tech-repair"].alt}
+          credit={`Photo: ${photos["tech-repair"].photographer} / Pexels`}
+          dark
+          class="mt-8"
+        />
+      </div>
+      <div class="space-y-6 text-base leading-relaxed text-paper/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
+        <ul class="flex flex-wrap gap-2.5">
+          {
+            repairPoints.map((point) => (
+              <li class="border border-mint/25 px-3.5 py-2 font-mono text-xs text-mint">
+                {point}
+              </li>
+            ))
+          }
+        </ul>
+        <p>
+          A machine that can only be repaired by flying in a technician isn't infrastructure — it's
+          a demonstration. We're building the version that's still running in year three.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <ClosingBand
+    headline="Technical due diligence welcome."
+    body="If you want to look at the record structure, query the ledger yourself, or pull apart the verification logic, we'll walk you through it."
+  />
+</Base>

@@ -29,6 +29,7 @@ GreenAfrica's vision is to unlock a circular economy where every PET bottle keep
 | `rvm_api`  | Edge service that runs on the vending machine, detects bottles, and orchestrates reward issuance  | FastAPI, OpenCV, WebSockets           | Computer-vision event stream, QR code payloads, operator dashboard API |
 | `rvm`      | Technician-facing mobile interface for provisioning RVMs and supervising sessions                 | Expo Router, React Native, TypeScript | Device onboarding flows, maintenance tools                             |
 | `webapp`   | Consumer web experience for recyclers to view their impact, redeem rewards, and onboard referrals | Next.js 15, Tailwind, Firebase        | Responsive dashboard, reward flows, analytics                          |
+| `website`  | Public marketing site — home, how it works, brands, partners, technology, about, contact          | Astro, Tailwind CSS v4                | Static site in `website/dist`                                          |
 
 ### Operational Flow
 
