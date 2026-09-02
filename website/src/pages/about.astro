@@ -5,22 +5,11 @@ import ClosingBand from "../components/ClosingBand.astro";
 import FramedPhoto from "../components/FramedPhoto.astro";
 import photos from "../data/photos.json";
 import imgCity from "../assets/photos/about-city.jpg";
-
-const entities = [
-  {
-    name: "Green Africa (Incorporated Trustees)",
-    text: "A registered Nigerian non-profit carrying the community, education, awareness and collection-mobilisation work, and the grant funding attached to it.",
-  },
-  {
-    name: "Amp10 Limited",
-    text: "The commercial entity holding trade, export and investment activity.",
-  },
-];
 ---
 
 <Base
   title="About Green Africa"
-  description="Who we are, how we're structured, and what we're actually trying to build."
+  description="Who we are, what we chose not to build, and what we're actually trying to build."
 >
   <PageHero
     eyebrow="About"
@@ -99,37 +88,11 @@ const entities = [
     </div>
   </section>
 
-  <!-- How we're structured -->
-  <section class="rule-t">
-    <div class="container-x py-16 sm:py-20">
-      <p class="eyebrow text-leaf">04 — How we're structured</p>
-      <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance">
-        Two entities, kept deliberately separate.
-      </h2>
-
-      <div class="mt-10 grid gap-px border border-ink/10 bg-ink/10 md:grid-cols-2">
-        {
-          entities.map((entity, index) => (
-            <article class="bg-paper p-7 sm:p-9" data-reveal style={`--d:${index * 120}ms`}>
-              <h3 class="text-lg font-semibold tracking-tight">{entity.name}</h3>
-              <p class="mt-3 text-sm leading-relaxed text-ink/70">{entity.text}</p>
-            </article>
-          ))
-        }
-      </div>
-
-      <p class="mt-8 max-w-2xl text-base leading-relaxed text-ink/75">
-        The separation is intentional. Grant money and trading revenue shouldn't share a bank
-        account, and funders are right to ask which one they're funding.
-      </p>
-    </div>
-  </section>
-
   <!-- Where we are -->
   <section class="bg-sand/60">
     <div class="container-x grid gap-10 py-16 sm:py-20 lg:grid-cols-12">
       <div class="lg:col-span-5" data-reveal>
-        <p class="eyebrow text-leaf">05 — Where we are</p>
+        <p class="eyebrow text-leaf">04 — Where we are</p>
         <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
           The problem is local, and so is the answer.
         </h2>
