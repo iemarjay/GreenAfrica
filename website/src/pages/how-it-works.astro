@@ -17,8 +17,8 @@ const steps = [
     number: "01",
     title: "Insert",
     paragraphs: [
-      "A recycler walks up to a Green Africa station. It looks like an ATM: an enclosed steel cabinet, weather-sealed, no exposed bin, no smell, nothing to vandalise. They feed in one bottle at a time.",
-      "One at a time is deliberate. It keeps the mechanism simple enough to repair with a screwdriver, and it means every single bottle gets its own verification and its own record. Machines that swallow a whole bag give you a guess. Ours gives you a count.",
+      "A recycler walks up to a Green Africa station. It looks more like an ATM than a bin: an enclosed steel cabinet, weather-sealed, with nothing exposed to smell or to vandalise. They feed in one bottle at a time.",
+      "One at a time is deliberate. It keeps the mechanism simple enough to repair with a screwdriver, and it means every bottle gets its own verification and its own record. A machine that swallows a whole bag at once can only estimate what was in it.",
     ],
     image: imgInsert,
     imageAlt: photos["step-insert"].alt,
@@ -28,7 +28,7 @@ const steps = [
     number: "02",
     title: "Verify",
     paragraphs: [
-      "Inside the chamber the bottle comes to rest in front of a fixed camera under controlled light. A small neural network running on the machine's onboard computer classifies it: is this PET, is it the right grade, is it the right shape? A load cell checks the weight — a full or part-full bottle is rejected, and so is a bottle that's been fed back in for a second payout.",
+      "Inside the chamber the bottle comes to rest in front of a fixed camera under controlled light. A small neural network running on the machine's onboard computer classifies it: whether it is PET, of the right grade and the right shape. A load cell checks the weight, which rejects a full or part-full bottle, and also catches one that has been fed back in for a second payout.",
       "The whole check takes about a second. No internet connection required.",
     ],
     image: imgVerify,
@@ -40,7 +40,7 @@ const steps = [
     title: "Reward",
     paragraphs: [
       "The machine sends airtime or data to the number the recycler entered. Value lands immediately.",
-      "We pay in airtime and data rather than cash for three reasons: it removes cash from a street-level machine, which removes the reason to attack it; it reaches people without bank accounts; and it's spendable the moment it arrives.",
+      "We pay in airtime and data rather than cash. Cash inside a street-level machine is a reason to attack it. Airtime also reaches people who have no bank account, and it is spendable the moment it arrives.",
     ],
     image: imgReward,
     imageAlt: photos["pay-phone"].alt,
@@ -51,14 +51,14 @@ const steps = [
     title: "Record",
     paragraphs: [
       "The verified deposit is signed on the device and queued locally. When the machine has connectivity, the record is submitted to Hedera's consensus network. Because records are hash-chained on the device before they're sent, a gap in the network can't be used to quietly insert, alter or delete a deposit after the fact.",
-      "What ends up on the ledger: a timestamp, a machine identifier, a material classification and a weight. What doesn't: anyone's personal details.",
+      "The ledger entry holds a timestamp, a machine identifier, a material classification and a weight. It holds nothing personal about the person who made the deposit.",
     ],
   },
   {
     number: "05",
     title: "Consolidate",
     paragraphs: [
-      "Machines are light-crush units at the edge — they compact bottles on the spot, because loose PET is mostly air and moving air by road is where collection margins die. Filled units are emptied on a route and consolidated at a central bale hub, where material is graded, baled and prepared for offtake.",
+      "Machines are light-crush units, compacting bottles on the spot. Loose PET is mostly air, and paying road freight to move air is what ruins collection margins. Filled units are emptied on a route and consolidated at a central bale hub, where material is graded, baled and prepared for offtake.",
     ],
     streams: [
       { material: "Clear PET", handling: "Primary stream — highest-value grade" },
@@ -75,7 +75,7 @@ const steps = [
     title: "Reconcile",
     paragraphs: [
       "Every bale carries back to the deposits that made it. Machine-level records roll up to route level, route to hub, hub to shipment. When a tonne leaves the hub, the ledger can account for where it came from.",
-      "That reconciliation is the product. The plastic is just what it's made of.",
+      "That reconciliation is the product.",
     ],
     image: imgReconcile,
     imageAlt: photos["record-ledger"].alt,
@@ -86,12 +86,12 @@ const steps = [
 
 <Base
   title="How it works — Green Africa"
-  description="From bottle to bale to verified record. A walk through the Green Africa recovery and verification chain."
+  description="How a bottle becomes a bale and a verified record, step by step through the Green Africa recovery chain."
 >
   <PageHero
     eyebrow="How it works"
     headline="From bottle to bale, with a receipt at every step."
-    subhead="Here's the whole chain, without the diagram-speak."
+    subhead="The whole chain, one step at a time."
   />
 
   <div class="container-x pb-20 sm:pb-28">
@@ -142,6 +142,6 @@ const steps = [
 
   <ClosingBand
     headline="Questions we're happy to answer properly."
-    body="How do you handle contamination? What's the uptime? What happens when someone tries to game it? Ask — we'll give you the real answer, including the parts that are still hard."
+    body="How do you handle contamination, what's the uptime, and what happens when someone tries to game it? Ask, and we'll tell you where it works and where it is still difficult."
   />
 </Base>

@@ -18,21 +18,21 @@ const whatWeDo = [
   {
     number: "01",
     title: "We verify at the point of recovery",
-    body: "Our machines use onboard computer vision and a load cell to confirm that what went in is an empty PET bottle — not a filled one, not a look-alike, not the same bottle twice. Verification happens inside a sealed chamber where lighting and camera position are fixed, which is why it's accurate and why it's cheap.",
+    body: "Onboard computer vision and a load cell confirm that what went in is an empty PET bottle, rather than a full one, a look-alike, or a bottle already deposited once. The check happens inside a sealed chamber with fixed lighting and a fixed camera position, which is what makes it both accurate and cheap.",
     image: imgVerify,
     imageAlt: photos["verify-conveyor"].alt,
   },
   {
     number: "02",
     title: "We pay instantly",
-    body: "No points to redeem later. No app store queue. Airtime or mobile data lands on the recycler's phone within seconds of the bottle dropping. It's the difference between a good idea and something people use twice.",
+    body: "Airtime or mobile data lands on the recycler's phone within seconds of the bottle dropping. There are no points to redeem later and no app to install first, which is most of the reason people come back a second time.",
     image: imgPay,
     imageAlt: photos["pay-phone"].alt,
   },
   {
     number: "03",
     title: "We record permanently",
-    body: "Each verified deposit is written to Hedera, a public distributed ledger. The record is timestamped, tamper-evident and independently checkable — by you, by an auditor, by a regulator, without asking us for permission.",
+    body: "Each verified deposit is written to Hedera, a public distributed ledger. The record is timestamped and tamper-evident, and anyone who wants to check it can do so without asking our permission. That includes your auditor and your regulator.",
     image: imgRecord,
     imageAlt: photos["record-ledger"].alt,
   },
@@ -47,19 +47,19 @@ const audiences = [
   },
   {
     label: "If you put plastic on the market",
-    text: "Get recovery data you can put in a compliance filing.",
+    text: "Recovery data you can put in a compliance filing.",
     cta: "For brands",
     href: "/for-brands",
   },
   {
     label: "If you buy or process recovered PET",
-    text: "Get baled, segregated feedstock with a documented chain of custody.",
+    text: "Baled, segregated feedstock with a documented chain of custody.",
     cta: "For partners",
     href: "/for-partners",
   },
   {
     label: "If you fund environmental outcomes",
-    text: "Get reporting that doesn't depend on trusting us.",
+    text: "Reporting that doesn't depend on trusting us.",
     cta: "Talk to us",
     href: "/contact",
   },
@@ -68,24 +68,24 @@ const audiences = [
 
 <Base
   title="Green Africa — Verified plastic recovery infrastructure"
-  description="AI-powered reverse vending machines that pay recyclers instantly and record every bottle on a public ledger. Built and fabricated in Nigeria."
+  description="Reverse vending machines that verify a bottle, pay the recycler in seconds, and record every deposit on a public ledger. Designed and built in Nigeria."
 >
   <!-- Hero -->
   <section class="container-x pb-16 pt-14 sm:pb-24 sm:pt-20">
     <div class="grid items-start gap-12 lg:grid-cols-12">
       <div class="lg:col-span-7">
-        <p class="eyebrow text-leaf" data-reveal>Verified plastic recovery infrastructure — Nigeria</p>
+        <p class="eyebrow text-leaf" data-reveal>Plastic recovery infrastructure, built in Nigeria</p>
         <h1
           class="mt-5 text-4xl font-semibold leading-[1.04] tracking-tight text-balance sm:text-5xl lg:text-6xl"
           data-reveal
           style="--d:90ms"
         >
-          Every bottle counted. Every claim provable.
+          Every bottle leaves a record.
         </h1>
         <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink/70" data-reveal style="--d:180ms">
           Green Africa builds reverse vending machines that verify a plastic bottle, pay the person
-          who brought it in seconds, and write a permanent record of the transaction to a public
-          ledger. We're building the layer African recycling has been missing: proof.
+          who brought it within seconds, and write a permanent record of the deposit to a public
+          ledger. The record is the part of recycling in Nigeria that has been missing.
         </p>
         <div class="mt-9 flex flex-wrap gap-4" data-reveal style="--d:270ms">
           <a href="/how-it-works" class="btn-primary">See how it works</a>
@@ -132,7 +132,7 @@ const audiences = [
       <div class="py-7 sm:pr-8" data-reveal>
         <p class="font-mono text-2xl font-medium tracking-tight">1st place</p>
         <p class="mt-1.5 text-sm leading-relaxed text-ink/60">
-          Overall winner, 2025 Hedera Africa Hackathon — 1,300+ submissions
+          Overall winner, 2025 Hedera Africa Hackathon, from 1,300+ submissions
         </p>
       </div>
       <div class="border-t border-ink/10 py-7 sm:border-l sm:border-t-0 sm:px-8" data-reveal style="--d:100ms">
@@ -158,7 +158,7 @@ const audiences = [
       <div class="lg:col-span-5" data-reveal>
         <p class="eyebrow text-leaf">01 — The problem</p>
         <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-          Africa doesn't have a collection problem. It has a verification problem.
+          The hard part is proving any of it happened.
         </h2>
         <FramedPhoto
           src={imgProblem}
@@ -169,17 +169,17 @@ const audiences = [
       </div>
       <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
         <p>
-          Plastic already moves. Informal collectors, aggregators and recyclers shift enormous
-          volumes every day across Nigerian cities. What almost none of it carries is a trustworthy
-          record — who recovered it, where, when, and whether the tonnage on the invoice matches the
+          Informal collectors, aggregators and recyclers already shift enormous volumes across
+          Nigerian cities every day. Very little of that material carries a record anyone would rely
+          on: who recovered it, where and when, and whether the tonnage on the invoice matches the
           tonnage in the yard.
         </p>
         <p>
-          That gap has a price. Brands with extended producer responsibility obligations can't
-          substantiate what they've funded. Credit buyers can't distinguish a real tonne from a
-          double-counted one. Funders write cheques against reports nobody can independently check.
-          And the person who actually did the work — the one carrying a sack of bottles across town —
-          gets paid last and least.
+          That gap has a price. Brands carrying extended producer responsibility obligations cannot
+          substantiate what they have funded, and credit buyers have no way to tell a real tonne
+          from a double-counted one. Funders write cheques against reports nobody outside the chain
+          can check. Meanwhile the person carrying a sack of bottles across town gets the smallest
+          share of what the material is worth.
         </p>
         <p class="font-medium text-ink">We started at that last point and worked backwards.</p>
       </div>
@@ -191,7 +191,7 @@ const audiences = [
     <div class="container-x py-16 sm:py-24">
       <p class="eyebrow text-leaf">02 — What we do</p>
       <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-        Three things, tightly connected.
+        Three things happen at the machine.
       </h2>
 
       <div class="mt-12 grid gap-px border border-ink/10 bg-ink/10 md:grid-cols-3">
@@ -227,7 +227,7 @@ const audiences = [
             What it adds up to.
           </h2>
         </div>
-        <p class="ledger-chip text-paper/45">Reconciled against the ledger — {asOfLabel}</p>
+        <p class="ledger-chip text-paper/45">Reconciled against the ledger, {asOfLabel}</p>
       </div>
 
       <div class="mt-12 grid gap-px border border-mint/15 bg-mint/15 sm:grid-cols-2 lg:grid-cols-4">
@@ -301,14 +301,14 @@ const audiences = [
       </div>
       <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
         <p>
-          Green Africa won first place overall at the 2025 Hedera Africa Hackathon — the cross-track
-          championship, out of more than 1,300 submissions from over 13,000 developers across the
-          continent. The prize funds the deployment now underway.
+          Green Africa won first place overall at the 2025 Hedera Africa Hackathon, taking the
+          cross-track championship out of more than 1,300 submissions from over 13,000 developers
+          across the continent. The prize money funds the deployment now underway.
         </p>
         <p>
-          Every machine is fabricated in Nigeria. That's not a slogan about local content; it's the
-          only way the unit economics work. An imported reverse vending machine costs more than the
-          plastic it will ever collect. Ours doesn't.
+          Every machine is fabricated in Nigeria, which is less a position on local content than a
+          condition of the unit economics working at all. An imported reverse vending machine costs
+          more than the plastic it will ever collect.
         </p>
         <a href="/about" class="inline-flex items-center gap-2 font-medium text-leaf hover:underline">
           More about us <span aria-hidden="true">&rarr;</span>
@@ -319,7 +319,7 @@ const audiences = [
 
   <ClosingBand
     headline="Want the detail?"
-    body="We'd rather have a real conversation than send you a brochure. Tell us who you are and what you need to know — offtake terms, EPR reporting, siting a machine, or how the ledger records actually work."
+    body="Tell us who you are and what you need to know: offtake terms, EPR reporting, siting a machine, or how the ledger records work. We'll write back with an actual answer."
   />
 
   <script>

@@ -9,15 +9,15 @@ import imgCompliance from "../assets/photos/brands-compliance.jpg";
 const deliverables = [
   {
     lead: "Point-of-recovery capture.",
-    text: "A record is created when the bottle is verified, at the machine — not reconstructed later from weighbridge tickets.",
+    text: "The record is created at the machine, when the bottle is verified, rather than reconstructed afterwards from weighbridge tickets.",
   },
   {
     lead: "Independent verification.",
-    text: "Records go to a public ledger. You can query them yourself. We cannot retroactively change what's already there, and neither can anyone else.",
+    text: "Records go to a public ledger and you can query them yourself. Once an entry is there we cannot change it, and neither can anyone else.",
   },
   {
     lead: "Unit-level granularity.",
-    text: "Item counts, not just tonnage estimates. Material grade, location and timestamp on every record.",
+    text: "Item counts rather than tonnage estimates, with material grade, location and timestamp on every record.",
   },
   {
     lead: "Reconciliation to physical material.",
@@ -32,7 +32,7 @@ const deliverables = [
 const engagements = [
   {
     title: "Sponsor a location",
-    text: "Fund machines at sites tied to where your product is consumed — campuses, gyms, retail forecourts, event venues. You get recovery attributed to your obligation and a visible presence where your customers are.",
+    text: "Fund machines at sites where your product is actually consumed: campuses, gyms, retail forecourts, event venues. Recovery is attributed to your obligation, and you have a visible presence where your customers already are.",
   },
   {
     title: "Buy verified recovery",
@@ -40,22 +40,22 @@ const engagements = [
   },
   {
     title: "Run a takeback with real numbers",
-    text: "Campaign activity that reports itself, with data you can publish without hedging.",
+    text: "Campaign activity that reports itself, with numbers you can publish as they are.",
   },
 ];
 
 const straightAnswers = [
   {
-    lead: "We're pre-scale, and we say so.",
-    text: "Deployment is underway now, with the first machines going into the ground and more in fabrication. If you need continental-scale tonnage today, we're not there. If you want to be early into a verification chain while it's still being designed around real obligations, that's exactly the conversation to have.",
+    lead: "We're pre-scale.",
+    text: "Deployment is underway now, with the first machines going into the ground and more in fabrication. Continental-scale tonnage is not something we can offer today. What we can offer is a place early in a verification chain that is still being designed around real obligations.",
   },
   {
     lead: "We don't sell offsets.",
     text: "We produce evidence of physical recovery. What you do with it under your regulatory framework is properly your call and your advisors'.",
   },
   {
-    lead: "Verification has limits and we'll name them.",
-    text: "The machine proves an empty PET bottle of a given weight was deposited at a given place and time. It does not prove the bottle was originally yours. Where attribution matters, we handle it through sited placement and contracted volume — and we'll tell you plainly which claims the data supports and which it doesn't.",
+    lead: "Verification has limits.",
+    text: "The machine proves an empty PET bottle of a given weight was deposited at a given place and time. It does not prove the bottle was originally yours. Where attribution matters, we handle it through sited placement and contracted volume, and we'll be specific about the limits of what the data supports.",
   },
 ];
 ---
@@ -67,7 +67,7 @@ const straightAnswers = [
   <PageHero
     eyebrow="For brands & EPR buyers"
     headline="Your recovery claims, backed by something other than our word."
-    subhead="Green Africa produces recovery data that an auditor can verify without a site visit and without trusting the operator — because the records aren't ours to edit."
+    subhead="Green Africa produces recovery data an auditor can verify without a site visit, because the records are not ours to edit."
   />
 
   <!-- The compliance problem -->
@@ -76,7 +76,7 @@ const straightAnswers = [
       <div class="lg:col-span-5" data-reveal>
         <p class="eyebrow text-leaf">01 — The compliance problem</p>
         <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance">
-          Reporting has outrun what collection chains can evidence.
+          Recovery certificates are self-issued.
         </h2>
         <FramedPhoto
           src={imgCompliance}
@@ -88,10 +88,10 @@ const straightAnswers = [
       <div class="space-y-5 text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7" data-reveal style="--d:120ms">
         <p>
           Producer responsibility obligations are tightening across the continent, and the reporting
-          expected under them has outrun what most collection chains can actually evidence. The
-          typical recovery certificate is a document produced by the same party that was paid to do
-          the recovery. It may well be accurate. It is not independently verifiable, and
-          increasingly that distinction matters — to regulators, to auditors, and to anyone whose
+          expected under them has outrun what most collection chains can evidence. The typical
+          recovery certificate is a document produced by the same party that was paid to do the
+          recovery. It may well be accurate, but nobody outside the transaction can confirm that,
+          and the distinction matters more each year to regulators, to auditors, and to anyone whose
           sustainability disclosures now sit under assurance.
         </p>
         <p>
@@ -165,6 +165,6 @@ const straightAnswers = [
 
   <ClosingBand
     headline="Bring us your reporting requirement."
-    body="If you can tell us what your filing or your assurance provider actually needs to see, we can tell you within a conversation whether our records meet it."
+    body="Tell us what your filing or your assurance provider needs to see, and we can tell you in one conversation whether our records meet it."
   />
 </Base>
