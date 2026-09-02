@@ -67,6 +67,19 @@
     @apply font-mono text-[11px] leading-relaxed;
   }
 
+  /*
+   * Hero ledger readout. A full record is ~110 monospace characters and the
+   * hero column is never that wide, so left to itself this overflows at every
+   * breakpoint and shows a scrollbar across the box. Wrap by default, which
+   * keeps the whole record readable with no JS and with reduced motion; the
+   * single-line terminal treatment is switched on below only when the typing
+   * animation is actually there to drive it.
+   */
+  .ledger-line {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
   .nav-link {
     position: relative;
   }
@@ -102,6 +115,23 @@
   html.js [data-reveal].is-visible {
     opacity: 1;
     transform: none;
+  }
+
+  /* Scrolled by the typing animation, so the scrollbar is chrome we don't
+     want; swipe and shift-scroll still work without it. */
+  html.js .ledger-line {
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  html.js .ledger-line::-webkit-scrollbar {
+    display: none;
+  }
+  /* Once the caret has run past the left edge, fade it so the record reads as
+     continuing off-screen rather than being chopped. */
+  html.js .ledger-line.is-scrolled {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 24px);
+    mask-image: linear-gradient(to right, transparent, #000 24px);
   }
 
   .ledger-cursor {

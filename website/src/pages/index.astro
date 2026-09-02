@@ -116,7 +116,7 @@ const audiences = [
             <div class="flex items-center">
               <code
                 id="ledger-line"
-                class="ledger-chip min-w-0 flex-1 overflow-x-auto whitespace-nowrap text-mint/80"
+                class="ledger-chip ledger-line min-w-0 flex-1 text-mint/80"
                 >{"{"}"ts":"2026-08-06T14:32:11Z","machine":"GA-IBD-004","material":"PET-CLEAR","weight_g":24,"status":"verified"{"}"}</code
               ><span class="ledger-cursor shrink-0" aria-hidden="true"></span>
             </div>
@@ -346,6 +346,9 @@ const audiences = [
 
         const typer = window.setInterval(() => {
           line.textContent = text.slice(0, ++charIndex);
+          // Follow the caret, the way a terminal would.
+          line.scrollLeft = line.scrollWidth;
+          line.classList.toggle("is-scrolled", line.scrollLeft > 0);
           if (charIndex >= text.length) {
             window.clearInterval(typer);
             if (depositCount) {
