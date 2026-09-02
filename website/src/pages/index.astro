@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import ClosingBand from "../components/ClosingBand.astro";
 import FramedPhoto from "../components/FramedPhoto.astro";
 import photos from "../data/photos.json";
+import { metrics, asOfLabel } from "../data/metrics";
 import heroMachine from "../assets/hero-machine.png";
 import imgProblem from "../assets/photos/problem-street.jpg";
 import imgVerify from "../assets/photos/verify-conveyor.jpg";
@@ -216,10 +217,47 @@ const audiences = [
     </div>
   </section>
 
+  <!-- Where we are -->
+  <section class="bg-pine text-paper">
+    <div class="container-x py-16 sm:py-20">
+      <div class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-3" data-reveal>
+        <div>
+          <p class="eyebrow text-leaf-bright">03 — Where we are</p>
+          <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+            What it adds up to.
+          </h2>
+        </div>
+        <p class="ledger-chip text-paper/45">Reconciled against the ledger — {asOfLabel}</p>
+      </div>
+
+      <div class="mt-12 grid gap-px border border-mint/15 bg-mint/15 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          metrics.map((metric, index) => (
+            <div class="bg-pine p-7" data-reveal style={`--d:${index * 90}ms`}>
+              <p class="font-mono text-3xl font-medium tracking-tight text-leaf-bright sm:text-4xl">
+                <span
+                  data-countup={metric.value}
+                  data-prefix={metric.prefix}
+                  data-suffix={metric.suffix}
+                  data-decimals={metric.decimals}
+                >
+                  {metric.display}
+                </span>
+              </p>
+              <p class="mt-3 font-semibold tracking-tight text-paper">{metric.label}</p>
+              <p class="mt-2 text-sm leading-relaxed text-paper/55">{metric.note}</p>
+            </div>
+          ))
+        }
+      </div>
+
+    </div>
+  </section>
+
   <!-- Who it's for -->
   <section class="rule-t">
     <div class="container-x py-16 sm:py-24">
-      <p class="eyebrow text-leaf">03 — Who it's for</p>
+      <p class="eyebrow text-leaf">04 — Who it's for</p>
       <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
         One machine, four audiences.
       </h2>
@@ -250,7 +288,7 @@ const audiences = [
   <section class="bg-sand/60">
     <div class="container-x grid gap-10 py-16 sm:py-24 lg:grid-cols-12">
       <div class="lg:col-span-5" data-reveal>
-        <p class="eyebrow text-leaf">04 — Proof point</p>
+        <p class="eyebrow text-leaf">05 — Proof point</p>
         <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
           Built here, and it works.
         </h2>
