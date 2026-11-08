@@ -80,6 +80,20 @@
     overflow-wrap: anywhere;
   }
 
+  /*
+   * Partner logos, each shown in its own brand colours. The Hashgraph
+   * Association and Hedera marks are monochrome by design, so they inherit
+   * currentColor and take the page's ink; the other two carry colour of their
+   * own and are left alone. Flattening the whole row to ink was tried first
+   * and collapsed the Exponential Science mark, whose swirl only separates
+   * from its frame by hue.
+   */
+  .partner-logo > svg {
+    display: block;
+    height: 100%;
+    width: auto;
+  }
+
   .nav-link {
     position: relative;
   }

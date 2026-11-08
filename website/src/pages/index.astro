@@ -11,6 +11,10 @@ import imgVerify from "../assets/photos/verify-conveyor.jpg";
 import imgPay from "../assets/photos/pay-phone.jpg";
 import imgRecord from "../assets/photos/record-ledger.jpg";
 import imgFabrication from "../assets/photos/proof-fabrication.jpg";
+import imgExponential from "../assets/partners/exponential-science.png";
+import logoHashgraphAssociation from "../assets/partners/hashgraph-association.svg?raw";
+import logoHedera from "../assets/partners/hedera.svg?raw";
+import logoDarBlockchain from "../assets/partners/dar-blockchain.svg?raw";
 
 const credit = (slug: keyof typeof photos) => `Photo: ${photos[slug].photographer} / Pexels`;
 
@@ -62,6 +66,33 @@ const audiences = [
     text: "Reporting that doesn't depend on trusting us.",
     cta: "Talk to us",
     href: "/contact",
+  },
+];
+
+const partners = [
+  {
+    name: "The Hashgraph Association",
+    href: "https://www.hashgraph.swiss",
+    svg: logoHashgraphAssociation,
+    logoClass: "h-7",
+  },
+  {
+    name: "Exponential Science",
+    href: "https://exp.science",
+    image: imgExponential,
+    logoClass: "h-12",
+  },
+  {
+    name: "Hedera",
+    href: "https://hedera.com",
+    svg: logoHedera,
+    logoClass: "h-7",
+  },
+  {
+    name: "DAR Blockchain",
+    href: "https://www.darblockchain.io",
+    svg: logoDarBlockchain,
+    logoClass: "h-10",
   },
 ];
 ---
@@ -314,6 +345,64 @@ const audiences = [
           More about us <span aria-hidden="true">&rarr;</span>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- Partners and supporters -->
+  <section>
+    <div class="container-x py-16 sm:py-24">
+      <div class="grid gap-x-10 gap-y-5 lg:grid-cols-12">
+        <div class="lg:col-span-5" data-reveal>
+          <p class="eyebrow text-leaf">06 &mdash; Partners and supporters</p>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+            Where the backing comes from.
+          </h2>
+        </div>
+        <p
+          class="text-base leading-relaxed text-ink/75 lg:col-span-6 lg:col-start-7 lg:self-end"
+          data-reveal
+          style="--d:120ms"
+        >
+          The deployment now underway is funded by prize money from the 2025 Hedera Africa
+          Hackathon, and every verified deposit is written to Hedera. These are the organisations
+          behind the programme and the network.
+        </p>
+      </div>
+
+      <ul class="mt-12 grid grid-cols-2 gap-px border border-ink/10 bg-ink/10 lg:grid-cols-4">
+        {
+          partners.map((partner, index) => (
+            <li class="bg-paper" data-reveal style={`--d:${index * 80}ms`}>
+              <a
+                href={partner.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex h-full flex-col p-5 transition-colors hover:bg-sand/50 sm:p-7"
+              >
+                <span class="flex h-14 items-center" aria-hidden="true">
+                  {partner.svg ? (
+                    <span
+                      class={`partner-logo block w-auto text-ink ${partner.logoClass}`}
+                      set:html={partner.svg}
+                    />
+                  ) : (
+                    <Image
+                      src={partner.image}
+                      alt=""
+                      widths={[220, 440]}
+                      sizes="220px"
+                      class={`w-auto ${partner.logoClass}`}
+                    />
+                  )}
+                </span>
+                <h3 class="mt-5 text-sm font-semibold tracking-tight transition-colors group-hover:text-leaf">
+                  {partner.name}
+                </h3>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
